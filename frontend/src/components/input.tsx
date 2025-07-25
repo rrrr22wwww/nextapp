@@ -24,8 +24,9 @@ export default function InputComp({placeholder}:{placeholder: string}) {
     },300)
     return (
                 <input
-                className="bg-gray-300/10 p-3 mb-4 rounded-[0.5em]" 
+                className="bg-gray-300/10 p-3 m-4 rounded-[0.5em]" 
                 placeholder={placeholder}
-                onChange={(e)=>handler(e.target.value)}></input>
+                onChange={(e)=>handler(e.target.value)}>    
+                </input>
     )
 }

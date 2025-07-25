@@ -14,10 +14,11 @@ export function Loading() {
         <div className = "flex justify-center items-center">
             <p className="m-5">Loading</p>
           <svg className="mr-3 -ml-1 size-5 m-5 animate-spin text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-        </div> 
+        </div>
     )
 }
 async function PostsList({ posts }: { posts:posts[] }) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
     return (
         <div className={`flex-col flex-wrap justify-center items-center ${montserrat.className}`}>
             {posts.map((value) => (
@@ -34,9 +35,8 @@ async function PostsList({ posts }: { posts:posts[] }) {
 export default async function Page({...propsPromise}:{
     params?:Promise<{ page?: number}>;
     searchParams?:Promise<{ query?: string}>;
-    
+
 }) {
-    await new Promise(resolve => setTimeout(resolve, 1000));
     const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=20");
     const posts: posts[] = await response.json();
     const searchParams = await propsPromise.searchParams;
@@ -44,8 +44,8 @@ export default async function Page({...propsPromise}:{
     const filteredPosts = posts.filter(post =>
         post.title.toLowerCase().includes(valueSearch.toLowerCase())
     );
-    
-    
+
+
     return (
         <>
         <div className='border-2 bg-gray-300/10 rounded-[0.5em] m-24 p-10'>
